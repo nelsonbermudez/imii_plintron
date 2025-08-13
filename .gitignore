@@ -1,7 +1,0 @@
-.env
-imei/
-request_ok/
-__pycache__/
-logs/*
-data/*
-.gitignore
