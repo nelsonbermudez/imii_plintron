@@ -1,0 +1,545 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified">
+<!-- >>>>>>>>>>>>>>>>>>>>>> ELEMENTO RAIZ <<<<<<<<<<<<<<<<<<<<<<<
+-->
+<xsd:element name="MensajeBDA">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="CabeceraMensaje" type="TipoCabeceraMensaje"/>
+<xsd:element name="CuerpoMensaje" type="TipoCuerpoMensaje"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<!-- >>>>>>>>>>>>>>>>>>>>>> TIPOS SIMPLES <<<<<<<<<<<<<<<<<<<<<<< -->
+<xsd:simpleType name="TipoIdentificadorProceso">
+<xsd:annotation>
+<xsd:documentation>Formato: CO + yyyy + mm + dd + ti + ccccc
+CO: codigo del operador (5 digitos)
+yyyy: anyo (4 digitos)
+mm: mes (2 digitos)
+dd: dia (2 digits)
+ti: tipo de proceso(2 digitos)
+ccccc: secuencia (5 digitos).</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="20"/>
+<xsd:pattern value="[0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoIdentificadorMensaje">
+<xsd:annotation>
+<xsd:documentation>Formato: CO + yyyy + mm + dd + ccccccc
+CO: codigo del operador (5 digitos)
+yyyy: anyo (4 digitos)
+mm: mes (2 digitos)
+dd: dia (2 digits)
+ccccccc: secuencia (7 digitos).</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="20"/>
+<xsd:pattern value="[0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoTipoMsg">
+<xsd:annotation>
+<xsd:documentation>1001: Solicitud de registro Positivo
+1002: Respuesta solicitud de registro positivo
+2001: Solicitud de registro Negativo
+2002: Respuesta ABD solicitud de registro Negativo
+2003: BroadCast de registro Negativo
+2004: Resultado de registro Negativo
+3001: Solicitud de cancelacion de registro Negativo
+3002: Respuesta ABD solicitud de cancelacion de registro Negativo
+3003: Respuesta ABD solicitud de cancelacion de registro Negativo
+3004: Resultado de cancelacion de registro Negativo en BDO
+4001: Solicitud de modificacion de registro Positivo
+4002: Respuesta ABD solicitud de modificacion de registro Positivo
+5001: Solicitud de cancelacion de registro Positivo
+5002: Respuesta ABD solicitud de cancelacion de registro Positivo
+6001: Notificacion de alta de IMEI en bda_positiva por Mintic
+9998: Error detectado por la BDA</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="4"/>
+<xsd:pattern
+value="1001|1002|2001|2002|2003|2004|3001|3002|3003|3004|4001|4002|5001|5002|9998|6
+001"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoCodigoOperador">
+<xsd:restriction base="xsd:string">
+<xsd:length value="5"/>
+<xsd:pattern value="[0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoFechaHora">
+<xsd:annotation>
+<xsd:documentation>Format: YYYYMMDDHHmiss</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="14"/>
+<xsd:pattern value="[0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoObservaciones">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0"/>
+<xsd:maxLength value="250"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoImei">
+<xsd:annotation>
+<xsd:documentation>Formato: XXXXXXYYZZZZZZW donde
+XXXXXX: se denomina Type Allocation Code (TAC)
+YY: se denomina Final Assembly Code (FAC) e indica el fabricante del equipo.
+ZZZZZZ: es el número de serie del teléfono.
+W: es el dígito verificador, usado para verificar que el IMEI es
+correcto.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="15"/>
+<xsd:pattern value="[0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoImsi">
+<xsd:annotation>
+<xsd:documentation>Formato: XXXYYZZZZZZZZZZ donde
+XXX: Código del país
+YY: Código de la red móvil. Estará formado 2 o 3 dígitos, en cuyo caso los
+siguientes dígitos serán 9
+ZZZZZZZZZZ: Número de 9 ó 10 dígitos como máximo que contiene la
+identificación de la estación móvil</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="15"/>
+<xsd:pattern value="[0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoNumero">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="15"/>
+<xsd:pattern value="[0-9]*"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoTipoUsuario">
+<xsd:annotation>
+<xsd:documentation>1: Natural
+2: Jurídico</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="1|2"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoIdentificacion">
+<xsd:annotation>
+<xsd:documentation>1: Cedula ciudadanía
+2: Pasaporte
+3: Número de identificación Tributaria NIT
+4:Cedula de extranjería CE
+5: PPT Permiso por Protección Temporal
+6: PEP Permiso Especial de Permanencia
+</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="1|2|3|4"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoNumeroIdentificacion">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="20"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoNombreRazonSocial">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="80"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoDireccion">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="80"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoCiudad">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="80"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoDepartamento">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="80"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoRespuestaABD">
+<xsd:annotation>
+<xsd:documentation>1: Aceptada solicitud
+0: Rechazada solicitud</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="0|1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoRespuestaPRT">
+<xsd:annotation>
+<xsd:documentation>1: Registro realizado
+0: Registro no realizado</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="0|1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoCodigoCausa">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="10"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoTecnologia">
+<xsd:annotation>
+<xsd:documentation>GSM: 01</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="2"/>
+<xsd:pattern value="01"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoReporte">
+<xsd:annotation>
+<xsd:documentation>1: Robo
+2: Extravio
+3: Bloqueo
+4: Inválido
+5: No homologado
+6: Duplicado
+7: Reincidente
+8: Administrativo
+9: IMEI utilizado al interior de centros carcelarios y/o penitenciarios para la planificación,
+comisión, ejecución y/o direccionamiento de delitos.
+</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="1|2|3|4|5|6|7|8|9"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoTipoModificacion">
+<xsd:annotation>
+<xsd:documentation>1: Venta Inicial
+2: Titularidad
+3: Modificacion </xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="1|2|3"/>
+</xsd:restriction>
+</xsd:simpleType>
+<!-- INICIO CAMPOS NUEVOS PROPUESTOS POR LA DIJIN Y PRESIDENCIA SEPTIEMBRE DE 2015
+(Andres Acuña Cano) -->
+<xsd:simpleType name="TipoEmpleoViolencia">
+<xsd:annotation>
+<xsd:documentation>0: No
+1: Si</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="0|1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoUtilizacionArmas">
+<xsd:annotation>
+<xsd:documentation>0: Fuego
+1: Blanca
+2: Otras</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="0|1|2"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoVictimaMenorEdad">
+<xsd:annotation>
+<xsd:documentation>0: No
+1: Si</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:length value="1"/>
+<xsd:pattern value="0|1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="TipoCorreoElectronico">
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1"/>
+<xsd:maxLength value="80"/>
+</xsd:restriction>
+</xsd:simpleType>
+<!-- FIN CAMPOS NUEVOS PROPUESTOS POR LA DIJIN Y PRESIDENCIA SEPTIEMBRE DE 2015
+-->
+<!-- >>>>>>>>>>>>>>>>>>>>>> TIPOS COMPUESTOS
+<<<<<<<<<<<<<<<<<<<<<<< -->
+<xsd:complexType name="TipoListaCodigosRechazo">
+<xsd:sequence>
+<xsd:element name="CodigoRechazo" type="TipoCodigoCausa" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoCabeceraMensaje">
+<xsd:sequence>
+<xsd:element name="IdentificadorProceso" type="TipoIdentificadorProceso"/>
+<xsd:element name="IdentificadorMensaje" type="TipoIdentificadorMensaje"/>
+<xsd:element name="FechaCreacionMsg" type="TipoFechaHora"/>
+<xsd:element name="TipoMsg" type="TipoTipoMsg"/>
+<xsd:element name="Emisor" type="TipoCodigoOperador"/>
+<xsd:element name="Destinatario" type="TipoCodigoOperador"/>
+<xsd:element name="Observaciones" type="TipoObservaciones" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoCuerpoMensaje">
+<xsd:choice>
+<xsd:element name="SolicitudRegistroPositivo" type="TipoSolicitudRegistroPositivo"/>
+<!-- 1001-->
+<xsd:element name="RespuestaRegistroPositivo" type="TipoRespuestaRegistroPositivo"/>
+<!-- 1002-->
+<xsd:element name="SolicitudRegistroNegativo" type="TipoSolicitudRegistroNegativo"/>
+<!-- 2001-->
+<xsd:element name="RespuestaRegistroNegativo" type="TipoRespuestaRegistroNegativo"/>
+<!-- 2002-->
+<xsd:element name="BroadCastRegistroNegativo" type="TipoBroadCastRegistroNegativo"/>
+<!-- 2003-->
+<xsd:element name="ResultadoRegistroNegativo" type="TipoResultadoRegistroNegativo"/>
+<!-- 2004-->
+<xsd:element name="SolicitudCancelacionRegistroNegativo"
+type="TipoSolicitudCancelacionRegistroNegativo"/>
+<!-- 3001-->
+<xsd:element name="RespuestaCancelacionRegistroNegativo"
+type="TipoRespuestaCancelacionRegistroNegativo"/>
+<!-- 3002-->
+<xsd:element name="BroadCastCancelacionRegistroNegativo"
+type="TipoBroadCastCancelacionRegistroNegativo"/>
+<!-- 3003-->
+<xsd:element name="ResultadoCancelacionRegistroNegativo"
+type="TipoResultadoCancelacionRegistroNegativo"/>
+<!-- 3004-->
+<xsd:element name="SolicitudModificacionRegistroPositivo"
+type="TipoSolicitudModificacionRegistroPositivo"/>
+<!-- 4001-->
+ <xsd:element name="RespuestaModificacionRegistroPositivo"
+type="TipoRespuestaModificacionRegistroPositivo"/>
+<!-- 4002-->
+<xsd:element name="SolicitudCancelacionRegistroPositivo"
+type="TipoSolicitudCancelacionRegistroPositivo"/>
+<!-- 5001-->
+<xsd:element name="RespuestaCancelacionRegistroPositivo"
+type="TipoRespuestaCancelacionRegistroPositivo"/>
+<!-- 5002-->
+<xsd:element name="ErrorDetectadoABD" type="TipoErrorDetectadoABD"/>
+<!-- 9998-->
+<xsd:element name="SincronizacionRegistroPositivo"
+type="TipoSincronizacionRegistroPositivo"/>
+<!-- 6001-->
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="TipoSolicitudRegistroPositivo">
+<!-- 1001-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="Imsi" type="TipoImsi" minOccurs="0"/>
+<xsd:element name="Msisdn" type="TipoNumero" minOccurs="0"/>
+<xsd:element name="NombreRazonSocialPropietario" type="TipoNombreRazonSocial"
+minOccurs="0"/>
+<xsd:element name="DireccionPropietario" type="TipoDireccion" minOccurs="0"/>
+<xsd:element name="TipoUsuarioPropietario" type="TipoTipoUsuario"/>
+<xsd:element name="TipoIdentificacionPropietario" type="TipoIdentificacion"/>
+<xsd:element name="IdentificacionPropietario" type="TipoNumeroIdentificacion"/>
+<xsd:element name="TelefonoContactoPropietario" type="TipoNumero" minOccurs="0"/>
+<xsd:element name="NombreRazonSocialAutorizado" type="TipoNombreRazonSocial"
+minOccurs="0"/>
+<xsd:element name="DireccionAutorizado" type="TipoDireccion" minOccurs="0"/>
+<xsd:element name="TipoUsuarioAutorizado" type="TipoTipoUsuario" minOccurs="0"/>
+<xsd:element name="TipoIdentificacionAutorizado" type="TipoIdentificacion"
+minOccurs="0"/>
+<xsd:element name="IdentificacionAutorizado" type="TipoNumeroIdentificacion"
+minOccurs="0"/>
+<xsd:element name="TelefonoContactoAutorizado" type="TipoNumero" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoRespuestaRegistroPositivo">
+<!-- 1002-->
+<xsd:sequence>
+<xsd:element name="TipoRespuesta" type="TipoRespuestaABD"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoSolicitudRegistroNegativo">
+<!-- 2001-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="Tecnologia" type="TipoTecnologia"/>
+<xsd:element name="FechaReporte" type="TipoFechaHora"/>
+<xsd:element name="NombreRazonSocialReporte" type="TipoNombreRazonSocial"
+minOccurs="0"/>
+<xsd:element name="TipoIdentificacionReporte" type="TipoIdentificacion" minOccurs="0"/>
+<xsd:element name="IdentificacionReporte" type="TipoNumeroIdentificacion"
+minOccurs="0"/>
+<xsd:element name="DireccionReporte" type="TipoDireccion" minOccurs="0"/>
+<xsd:element name="TelefonoContactoReporte" type="TipoNumero" minOccurs="0"/>
+<xsd:element name="DepartamentoReporte" type="TipoDepartamento" minOccurs="0"/>
+<xsd:element name="CiudadReporte" type="TipoCiudad" minOccurs="0"/>
+<xsd:element name="TipoReporte" type="TipoReporte"/>
+<!-- INICIO ADICION CAMPOS NUEVOS PROPUESTOS POR LA DIJIN Y PRESIDENCIA SEPTIEMBRE
+DE 2015 (Andres Acuña Cano) -->
+<xsd:element name="EmpleoViolencia" type="TipoEmpleoViolencia" minOccurs="0"/>
+<xsd:element name="UtilizacionArmas" type="TipoUtilizacionArmas" minOccurs="0"/>
+<xsd:element name="VictimaMenorEdad" type="TipoVictimaMenorEdad"
+minOccurs="0"/>
+<xsd:element name="CorreoElectronico" type="TipoCorreoElectronico" minOccurs="0"/>
+<!-- FIN ADICION CAMPOS NUEVOS PROPUESTOS POR LA DIJIN Y PRESIDENCIA SEPTIEMBRE DE
+2015 -->
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoRespuestaRegistroNegativo">
+<!-- 2002-->
+<xsd:sequence>
+<xsd:element name="TipoRespuesta" type="TipoRespuestaABD"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoBroadCastRegistroNegativo">
+<!-- 2003-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="Tecnologia" type="TipoTecnologia"/>
+<xsd:element name="TipoReporte" type="TipoReporte" minOccurs="0"/>
+<xsd:element name="FechaReporte" type="TipoFechaHora"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoResultadoRegistroNegativo">
+<!-- 2004-->
+<xsd:sequence>
+<xsd:element name="TipoRespuesta" type="TipoRespuestaPRT"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoSolicitudCancelacionRegistroNegativo">
+<!-- 3001-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="FechaReporte" type="TipoFechaHora"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoRespuestaCancelacionRegistroNegativo">
+<!-- 3002-->
+<xsd:sequence>
+<xsd:element name="TipoRespuesta" type="TipoRespuestaABD"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoBroadCastCancelacionRegistroNegativo">
+<!-- 3003-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="FechaReporte" type="TipoFechaHora"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoResultadoCancelacionRegistroNegativo">
+<!-- 3004-->
+<xsd:sequence>
+<xsd:element name="TipoRespuesta" type="TipoRespuestaPRT"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoSolicitudModificacionRegistroPositivo">
+<!-- 4001-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="Imsi" type="TipoImsi" minOccurs="0"/>
+<xsd:element name="Msisdn" type="TipoNumero" minOccurs="0"/>
+<xsd:element name="NombreRazonSocialPropietario" type="TipoNombreRazonSocial"
+minOccurs="0"/>
+<xsd:element name="DireccionPropietario" type="TipoDireccion" minOccurs="0"/>
+<xsd:element name="TipoUsuarioPropietario" type="TipoTipoUsuario"/>
+<xsd:element name="TipoIdentificacionPropietario" type="TipoIdentificacion"/>
+<xsd:element name="IdentificacionPropietario" type="TipoNumeroIdentificacion"/>
+<xsd:element name="TelefonoContactoPropietario" type="TipoNumero" minOccurs="0"/>
+<xsd:element name="NombreRazonSocialAutorizado" type="TipoNombreRazonSocial"
+minOccurs="0"/>
+<xsd:element name="DireccionAutorizado" type="TipoDireccion" minOccurs="0"/>
+<xsd:element name="TipoUsuarioAutorizado" type="TipoTipoUsuario" minOccurs="0"/>
+<xsd:element name="TipoIdentificacionAutorizado" type="TipoIdentificacion"
+minOccurs="0"/>
+<xsd:element name="IdentificacionAutorizado" type="TipoNumeroIdentificacion"
+minOccurs="0"/>
+<xsd:element name="TelefonoContactoAutorizado" type="TipoNumero" minOccurs="0"/>
+<xsd:element name="TipoIdentificacionPropietarioAnterior" type="TipoIdentificacion"
+minOccurs="0"/>
+<xsd:element name="IdentificacionPropietarioAnterior" type="TipoNumeroIdentificacion"
+minOccurs="0"/>
+<xsd:element name="TipoModificacion" type="TipoTipoModificacion" />
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoRespuestaModificacionRegistroPositivo">
+<!-- 4002-->
+ <xsd:sequence>
+<xsd:element name="TipoRespuesta" type="TipoRespuestaABD"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoSolicitudCancelacionRegistroPositivo">
+<!-- 5001-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="TipoUsuarioPropietario" type="TipoTipoUsuario"/>
+<xsd:element name="TipoIdentificacionPropietario" type="TipoIdentificacion"/>
+<xsd:element name="IdentificacionPropietario" type="TipoNumeroIdentificacion"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoRespuestaCancelacionRegistroPositivo">
+<!-- 5002-->
+<xsd:sequence>
+<xsd:element name="TipoRespuesta" type="TipoRespuestaABD"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TipoErrorDetectadoABD">
+<!-- 9998-->
+<xsd:sequence>
+<xsd:element name="IdentificadorProcesoErroneo" type="TipoIdentificadorProceso"/>
+<xsd:element name="IdentificadorMensajeErroneo" type="TipoIdentificadorMensaje"/>
+<xsd:element name="CodigosRechazo" type="TipoListaCodigosRechazo"/>
+</xsd:sequence>
+</xsd:complexType>
+<!-- Definicion mensaje (6001) Notificacion de alta de IMEI en bda_positiva por Mintic -->
+<xsd:complexType name="TipoSincronizacionRegistroPositivo">
+<!-- 6001-->
+<xsd:sequence>
+<xsd:element name="Imei" type="TipoImei"/>
+<xsd:element name="Imsi" type="TipoImsi" minOccurs="0"/>
+<xsd:element name="Msisdn" type="TipoNumero" minOccurs="0"/>
+<xsd:element name="NombreRazonSocialPropietario" type="TipoNombreRazonSocial"
+minOccurs="0"/>
+<xsd:element name="DireccionPropietario" type="TipoDireccion" minOccurs="0"/>
+<xsd:element name="TipoUsuarioPropietario" type="TipoTipoUsuario"/>
+<xsd:element name="TipoIdentificacionPropietario" type="TipoIdentificacion"/>
+<xsd:element name="IdentificacionPropietario" type="TipoNumeroIdentificacion"/>
+<xsd:element name="TelefonoContactoPropietario" type="TipoNumero"
+minOccurs="0"/>
+<xsd:element name="NombreRazonSocialAutorizado" type="TipoNombreRazonSocial"
+minOccurs="0"/>
+<xsd:element name="DireccionAutorizado" type="TipoDireccion" minOccurs="0"/>
+<xsd:element name="TipoUsuarioAutorizado" type="TipoTipoUsuario"
+minOccurs="0"/>
+<xsd:element name="TipoIdentificacionAutorizado" type="TipoIdentificacion"
+minOccurs="0"/>
+<xsd:element name="IdentificacionAutorizado" type="TipoNumeroIdentificacion"
+minOccurs="0"/>
+<xsd:element name="TelefonoContactoAutorizado" type="TipoNumero" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

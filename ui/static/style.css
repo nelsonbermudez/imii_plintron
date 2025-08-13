@@ -1,0 +1,916 @@
+/* styles.css - Estilos para SRTM API Client */
+
+/* Variables CSS para consistencia de colores */
+:root {
+    --primary-blue: #0d6efd;
+    --secondary-blue: #6c757d;
+    --light-blue: #e3f2fd;
+    --dark-blue: #0a58ca;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --border-color: #dee2e6;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #0dcaf0;
+}
+
+/* Estilos generales del cuerpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navegación personalizada */
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgba(255, 255, 255, 0.9) !important;
+    transform: translateY(-1px);
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    transform: translateX(5px);
+}
+
+/* Sección de bienvenida */
+#welcome-section {
+    padding: 40px 0;
+}
+
+#welcome-section .display-4 {
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+
+#welcome-section .card {
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
+    border: none;
+    border-radius: 15px;
+}
+
+/* Estilos de formularios */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%) !important;
+}
+
+.card-header.bg-warning {
+    background: linear-gradient(135deg, var(--warning-color) 0%, #e0a800 100%) !important;
+}
+
+.card-header.bg-success {
+    background: linear-gradient(135deg, var(--success-color) 0%, #146c43 100%) !important;
+}
+
+.card-header.bg-info {
+    background: linear-gradient(135deg, var(--info-color) 0%, #0aa1dd 100%) !important;
+}
+
+.card-header.bg-danger {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #b02a37 100%) !important;
+}
+
+.card-header h4 {
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.card-header small {
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.card-body {
+    padding: 25px;
+    background-color: var(--white);
+}
+
+/* Estilos de campos de formulario */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    transform: translateY(-1px);
+}
+
+.form-control:hover, .form-select:hover {
+    border-color: var(--primary-blue);
+}
+
+/* ========================================
+   ESTILOS ESPECÍFICOS PARA FECHA REPORTE
+   ======================================== */
+
+/* Input group personalizado para fecha reporte */
+.input-group .form-control.fecha-reporte-input {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.input-group .input-group-text {
+    background: linear-gradient(135deg, var(--info-color) 0%, #0aa1dd 100%);
+    border: 2px solid var(--info-color);
+    color: white;
+    font-weight: 600;
+}
+
+/* Botón de fecha actual */
+#btn-fecha-actual {
+    border: 2px solid var(--secondary-blue);
+    background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+    color: var(--secondary-blue);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#btn-fecha-actual:hover {
+    background: linear-gradient(135deg, var(--info-color) 0%, #0aa1dd 100%);
+    border-color: var(--info-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(13, 202, 240, 0.3);
+}
+
+#btn-fecha-actual:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(13, 202, 240, 0.3);
+}
+
+/* Preview de fecha */
+.fecha-preview {
+    background: linear-gradient(135deg, rgba(13, 202, 240, 0.1) 0%, rgba(13, 202, 240, 0.05) 100%);
+    border: 1px solid rgba(13, 202, 240, 0.3);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.fecha-preview .fecha-readable {
+    color: #0a6aa8;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Validación específica para fecha reporte */
+.fecha-reporte-input.is-valid {
+    border-color: var(--success-color) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='m2.3 6.73.94-.94 1.96 1.96L7.17 5.8l.94.94L4.22 10.67 2.3 6.73z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.fecha-reporte-input.is-invalid {
+    border-color: var(--danger-color) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.5 5.5 1 1m0 0 1 1m-1-1-1 1m1-1 1-1'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Estilos para el placeholder */
+.fecha-reporte-input::placeholder {
+    color: #6c757d;
+    opacity: 0.8;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+/* Animación para la fecha preview */
+.fecha-preview {
+    animation: fadeInSlide 0.3s ease-out;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Texto de ayuda mejorado */
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+.form-control + .form-text,
+.input-group + .form-text {
+    margin-top: 0.5rem;
+}
+
+/* Campos requeridos */
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+/* Botones personalizados */
+.btn {
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--warning-color) 0%, #e0a800 100%);
+    color: #000;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-color) 0%, #146c43 100%);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, var(--info-color) 0%, #0aa1dd 100%);
+    color: #000;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #b02a37 100%);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary-blue) 0%, #495057 100%);
+}
+
+/* Separadores de secciones */
+.border-bottom {
+    border-bottom: 2px solid var(--primary-blue) !important;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Alertas personalizadas */
+.alert {
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-weight: 500;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(13, 202, 240, 0.1) 0%, rgba(13, 202, 240, 0.05) 100%);
+    color: #055160;
+    border-left: 4px solid var(--info-color);
+}
+
+/* Overlay de carga */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-content {
+    text-align: center;
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.loading-content p {
+    margin-top: 15px;
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+/* ========================================
+   RESPUESTAS DE LA API - RESPONSIVE
+   ======================================== */
+
+/* Áreas de respuesta */
+.response-area {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.response-area h5 {
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+/* Tablas de respuesta responsivas */
+.response-table {
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.response-table .table {
+    margin-bottom: 0;
+}
+
+.response-table .table th {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+.response-table .table td {
+    padding: 12px 15px;
+    border-color: var(--border-color);
+    vertical-align: middle;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+}
+
+.response-table .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Estados de respuesta mejorados */
+.response-success {
+    border-left: 4px solid var(--success-color);
+    background: linear-gradient(135deg, rgba(25, 135, 84, 0.1) 0%, rgba(25, 135, 84, 0.05) 100%);
+}
+
+.response-error {
+    border-left: 4px solid var(--danger-color);
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(220, 53, 69, 0.05) 100%);
+}
+
+.response-warning {
+    border-left: 4px solid var(--warning-color);
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%);
+}
+
+/* Tablas de éxito con colores verdes */
+.table-success th {
+    background-color: var(--success-color) !important;
+    color: white !important;
+}
+
+.table-success td,
+.table-success tr {
+    background-color: rgba(25, 135, 84, 0.1) !important;
+    border-color: rgba(25, 135, 84, 0.2) !important;
+}
+
+/* Información adicional para respuestas 200 */
+.response-success .text-muted {
+    color: #0f5132 !important;
+}
+
+.response-success .bg-success {
+    background-color: rgba(25, 135, 84, 0.1) !important;
+    border-color: var(--success-color) !important;
+}
+
+/* Mejorar la presentación de respuestas exitosas sin datos */
+.no-data-success {
+    background: linear-gradient(135deg, rgba(25, 135, 84, 0.1) 0%, rgba(25, 135, 84, 0.05) 100%);
+    border: 1px solid rgba(25, 135, 84, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.no-data-success .fas {
+    color: var(--success-color);
+    font-size: 1.2rem;
+}
+
+/* Badge de estado OK específico */
+.status-ok {
+    background-color: var(--success-color);
+    color: white;
+    border: 2px solid #146c43;
+}
+
+/* Mejorar contraste en respuestas exitosas */
+.response-success h6 {
+    color: #0f5132 !important;
+    font-weight: 700;
+}
+
+/* Badges en las respuestas */
+.status-badge {
+    font-size: 0.875rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.status-error {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.status-warning {
+    background-color: var(--warning-color);
+    color: #000;
+}
+
+/* Botón de limpiar respuesta */
+.clear-response-btn {
+    background: rgba(108, 117, 125, 0.1);
+    border: 1px solid rgba(108, 117, 125, 0.3);
+    color: #6c757d;
+    font-size: 0.875rem;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.clear-response-btn:hover {
+    background: rgba(108, 117, 125, 0.2);
+    border-color: rgba(108, 117, 125, 0.5);
+    color: #495057;
+    transform: translateY(-1px);
+}
+
+/* Códigos de error */
+.error-code {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    word-break: break-all;
+}
+
+/* Información de debug expandible */
+.debug-collapsible {
+    margin-top: 15px;
+}
+
+.debug-collapsible summary {
+    cursor: pointer;
+    padding: 10px;
+    background-color: var(--light-gray);
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s ease;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.debug-collapsible summary::-webkit-details-marker {
+    display: none;
+}
+
+.debug-collapsible summary:hover {
+    background-color: var(--border-color);
+}
+
+.debug-collapsible[open] summary {
+    border-radius: 5px 5px 0 0;
+    background-color: var(--secondary-blue);
+    color: white;
+}
+
+.debug-content {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    padding: 15px;
+}
+
+/* Mejoras para responsive */
+.table-responsive {
+    border-radius: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Animación para mostrar respuestas */
+.response-area.show {
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+    
+    #welcome-section {
+        padding: 20px 0;
+    }
+    
+    #welcome-section .display-4 {
+        font-size: 2rem;
+    }
+    
+    /* Fecha reporte responsivo en tablet */
+    .fecha-reporte-input {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .fecha-preview {
+        padding: 6px 10px;
+    }
+    
+    .fecha-preview .fecha-readable {
+        font-size: 0.8rem;
+    }
+    
+    #btn-fecha-actual {
+        padding: 8px 12px;
+    }
+    
+    /* Respuestas responsivas en tablet */
+    .response-area {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .response-table .table th {
+        padding: 10px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .response-table .table td {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+    
+    .response-table .table th,
+    .response-table .table td {
+        word-break: break-word;
+        max-width: 150px;
+    }
+    
+    .text-break {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto;
+    }
+    
+    .clear-response-btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+    
+    .col-4 {
+        flex: 0 0 35%;
+        max-width: 35%;
+    }
+    
+    .col-8 {
+        flex: 0 0 65%;
+        max-width: 65%;
+    }
+    
+    .table-responsive {
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-responsive::-webkit-scrollbar {
+        height: 5px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb {
+        background: var(--primary-blue);
+        border-radius: 3px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: var(--dark-blue);
+    }
+}
+
+/* Móvil (≤576px) */
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    .card-header {
+        padding: 15px 20px;
+    }
+    
+    .card-header h4 {
+        font-size: 1.3rem;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .d-flex.gap-2 {
+        flex-direction: column;
+        gap: 0 !important;
+    }
+    
+    /* Fecha reporte muy responsivo en móvil */
+    .input-group {
+        flex-wrap: wrap;
+    }
+    
+    .fecha-reporte-input {
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        min-width: 200px;
+    }
+    
+    #btn-fecha-actual {
+        width: 100%;
+        margin-top: 5px;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .fecha-preview {
+        padding: 8px;
+        margin-top: 10px;
+    }
+    
+    .fecha-preview .fecha-readable {
+        font-size: 0.8rem;
+        display: block;
+        text-align: center;
+    }
+    
+    /* Respuestas muy responsivas en móvil */
+    .response-area {
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .response-table .table th {
+        padding: 8px 5px;
+        font-size: 0.75rem;
+    }
+    
+    .response-table .table td {
+        padding: 6px 5px;
+        font-size: 0.75rem;
+    }
+    
+    .col-4 {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+    
+    .col-8 {
+        flex: 0 0 70%;
+        max-width: 70%;
+    }
+    
+    .clear-response-btn span {
+        display: none;
+    }
+    
+    .response-area h5 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+    
+    .error-code {
+        font-size: 0.75rem;
+        padding: 2px 4px;
+    }
+    
+    .debug-collapsible summary {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .debug-content {
+        padding: 10px;
+    }
+    
+    .table-sm th,
+    .table-sm td {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .response-area .fas {
+        font-size: 0.875rem;
+    }
+    
+    .mt-3 {
+        margin-top: 1rem !important;
+    }
+    
+    .mb-3 {
+        margin-bottom: 1rem !important;
+    }
+}
+
+/* Dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .debug-collapsible summary {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    .clear-response-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #btn-fecha-actual {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .fecha-reporte-input {
+        min-height: 44px;
+    }
+    
+    .response-area > * + * {
+        margin-top: 1.5rem;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: var(--white) !important;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Estados de validación */
+.is-invalid {
+    border-color: var(--danger-color) !important;
+}
+
+.is-valid {
+    border-color: var(--success-color) !important;
+}
+
+.invalid-feedback, .valid-feedback {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Utilidades adicionales */
+.text-primary {
+    color: var(--primary-blue) !important;
+}
+
+.bg-light-blue {
+    background-color: var(--light-blue) !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}

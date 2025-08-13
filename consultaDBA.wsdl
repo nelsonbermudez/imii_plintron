@@ -1,0 +1,368 @@
+<wsdl:definitions xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.consultabda.srtm.iecisa.co" xmlns:intf="http://service.consultabda.srtm.iecisa.co" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://service.consultabda.srtm.iecisa.co">
+<!-- WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT) -->
+<wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://service.consultabda.srtm.iecisa.co">
+<element name="consultaBDAPositiva">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaResponse">
+<complexType>
+<sequence>
+<element name="consultaBDAPositivaReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaEstado">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaEstadoResponse">
+<complexType>
+<sequence>
+<element name="consultaBDAPositivaEstadoReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaOrganismosOficiales">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaOrganismosOficialesResponse">
+<complexType>
+<sequence>
+<element name="consultaBDAPositivaOrganismosOficialesReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaEstadoOrganismosEntidades">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaEstadoOrganismosEntidadesResponse">
+<complexType>
+<sequence>
+<element name="consultaBDAPositivaEstadoOrganismosEntidadesReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaFiscalia">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDAPositivaFiscaliaResponse">
+<complexType>
+<sequence>
+<element name="consultaBDAPositivaFiscaliaReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativa">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaResponse">
+<complexType>
+<sequence>
+<element name="consultaBDANegativaReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaTipoReporte">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaTipoReporteResponse">
+<complexType>
+<sequence>
+<element name="consultaBDANegativaTipoReporteReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaOrganismosOficiales">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaOrganismosOficialesResponse">
+<complexType>
+<sequence>
+<element name="consultaBDANegativaOrganismosOficialesReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaFiscalia">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaFiscaliaResponse">
+<complexType>
+<sequence>
+<element name="consultaBDANegativaFiscaliaReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaINPEC">
+<complexType>
+<sequence>
+<element name="usuario" type="xsd:string"/>
+<element name="password" type="xsd:string"/>
+<element name="xml" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="consultaBDANegativaINPECResponse">
+<complexType>
+<sequence>
+<element name="consultaBDANegativaINPECReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+</schema>
+</wsdl:types>
+<wsdl:message name="consultaBDANegativaTipoReporteRequest">
+<wsdl:part element="impl:consultaBDANegativaTipoReporte" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaINPECResponse">
+<wsdl:part element="impl:consultaBDANegativaINPECResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaTipoReporteResponse">
+<wsdl:part element="impl:consultaBDANegativaTipoReporteResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaEstadoRequest">
+<wsdl:part element="impl:consultaBDAPositivaEstado" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaFiscaliaRequest">
+<wsdl:part element="impl:consultaBDAPositivaFiscalia" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaFiscaliaRequest">
+<wsdl:part element="impl:consultaBDANegativaFiscalia" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaFiscaliaResponse">
+<wsdl:part element="impl:consultaBDANegativaFiscaliaResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaEstadoResponse">
+<wsdl:part element="impl:consultaBDAPositivaEstadoResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaResponse">
+<wsdl:part element="impl:consultaBDANegativaResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaResponse">
+<wsdl:part element="impl:consultaBDAPositivaResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaOrganismosOficialesRequest">
+<wsdl:part element="impl:consultaBDAPositivaOrganismosOficiales" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaFiscaliaResponse">
+<wsdl:part element="impl:consultaBDAPositivaFiscaliaResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaEstadoOrganismosEntidadesRequest">
+<wsdl:part element="impl:consultaBDAPositivaEstadoOrganismosEntidades" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaOrganismosOficialesResponse">
+<wsdl:part element="impl:consultaBDAPositivaOrganismosOficialesResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaOrganismosOficialesResponse">
+<wsdl:part element="impl:consultaBDANegativaOrganismosOficialesResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaINPECRequest">
+<wsdl:part element="impl:consultaBDANegativaINPEC" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaRequest">
+<wsdl:part element="impl:consultaBDANegativa" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaRequest">
+<wsdl:part element="impl:consultaBDAPositiva" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDAPositivaEstadoOrganismosEntidadesResponse">
+<wsdl:part element="impl:consultaBDAPositivaEstadoOrganismosEntidadesResponse" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="consultaBDANegativaOrganismosOficialesRequest">
+<wsdl:part element="impl:consultaBDANegativaOrganismosOficiales" name="parameters"/>
+</wsdl:message>
+<wsdl:portType name="ConsultaBDA">
+<wsdl:operation name="consultaBDAPositiva">
+<wsdl:input message="impl:consultaBDAPositivaRequest" name="consultaBDAPositivaRequest"/>
+<wsdl:output message="impl:consultaBDAPositivaResponse" name="consultaBDAPositivaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaEstado">
+<wsdl:input message="impl:consultaBDAPositivaEstadoRequest" name="consultaBDAPositivaEstadoRequest"/>
+<wsdl:output message="impl:consultaBDAPositivaEstadoResponse" name="consultaBDAPositivaEstadoResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaOrganismosOficiales">
+<wsdl:input message="impl:consultaBDAPositivaOrganismosOficialesRequest" name="consultaBDAPositivaOrganismosOficialesRequest"/>
+<wsdl:output message="impl:consultaBDAPositivaOrganismosOficialesResponse" name="consultaBDAPositivaOrganismosOficialesResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaEstadoOrganismosEntidades">
+<wsdl:input message="impl:consultaBDAPositivaEstadoOrganismosEntidadesRequest" name="consultaBDAPositivaEstadoOrganismosEntidadesRequest"/>
+<wsdl:output message="impl:consultaBDAPositivaEstadoOrganismosEntidadesResponse" name="consultaBDAPositivaEstadoOrganismosEntidadesResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaFiscalia">
+<wsdl:input message="impl:consultaBDAPositivaFiscaliaRequest" name="consultaBDAPositivaFiscaliaRequest"/>
+<wsdl:output message="impl:consultaBDAPositivaFiscaliaResponse" name="consultaBDAPositivaFiscaliaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativa">
+<wsdl:input message="impl:consultaBDANegativaRequest" name="consultaBDANegativaRequest"/>
+<wsdl:output message="impl:consultaBDANegativaResponse" name="consultaBDANegativaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaTipoReporte">
+<wsdl:input message="impl:consultaBDANegativaTipoReporteRequest" name="consultaBDANegativaTipoReporteRequest"/>
+<wsdl:output message="impl:consultaBDANegativaTipoReporteResponse" name="consultaBDANegativaTipoReporteResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaOrganismosOficiales">
+<wsdl:input message="impl:consultaBDANegativaOrganismosOficialesRequest" name="consultaBDANegativaOrganismosOficialesRequest"/>
+<wsdl:output message="impl:consultaBDANegativaOrganismosOficialesResponse" name="consultaBDANegativaOrganismosOficialesResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaFiscalia">
+<wsdl:input message="impl:consultaBDANegativaFiscaliaRequest" name="consultaBDANegativaFiscaliaRequest"/>
+<wsdl:output message="impl:consultaBDANegativaFiscaliaResponse" name="consultaBDANegativaFiscaliaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaINPEC">
+<wsdl:input message="impl:consultaBDANegativaINPECRequest" name="consultaBDANegativaINPECRequest"/>
+<wsdl:output message="impl:consultaBDANegativaINPECResponse" name="consultaBDANegativaINPECResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ConsultaBDASoapBinding" type="impl:ConsultaBDA">
+<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="consultaBDAPositiva">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDAPositivaRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDAPositivaResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaEstado">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDAPositivaEstadoRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDAPositivaEstadoResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaOrganismosOficiales">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDAPositivaOrganismosOficialesRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDAPositivaOrganismosOficialesResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaEstadoOrganismosEntidades">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDAPositivaEstadoOrganismosEntidadesRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDAPositivaEstadoOrganismosEntidadesResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDAPositivaFiscalia">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDAPositivaFiscaliaRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDAPositivaFiscaliaResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativa">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDANegativaRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDANegativaResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaTipoReporte">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDANegativaTipoReporteRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDANegativaTipoReporteResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaOrganismosOficiales">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDANegativaOrganismosOficialesRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDANegativaOrganismosOficialesResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaFiscalia">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDANegativaFiscaliaRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDANegativaFiscaliaResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaBDANegativaINPEC">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="consultaBDANegativaINPECRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaBDANegativaINPECResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="ConsultaBDAService">
+<wsdl:port binding="impl:ConsultaBDASoapBinding" name="ConsultaBDA">
+<wsdlsoap:address location="http://10.161.100.5:8080/ConsultaBDA/services/ConsultaBDA"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRTM API Client</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="static/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-mobile-alt me-2"></i>
+                SRTM API Client
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="accionesDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cogs me-1"></i>Acciones SRTM
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-form="registro-positivo">
+                                <i class="fas fa-plus-circle me-2"></i>Registro Positivo
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-form="registro-negativo">
+                                <i class="fas fa-exclamation-triangle me-2"></i>Registro Negativo
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-form="cancelacion-negativo">
+                                <i class="fas fa-times-circle me-2"></i>Cancelación Negativo
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-form="modificacion-positivo">
+                                <i class="fas fa-edit me-2"></i>Modificación Positivo
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-form="cancelacion-positivo">
+                                <i class="fas fa-minus-circle me-2"></i>Cancelación Positivo
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="consultasDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-search me-1"></i>Consultas BDA
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-form="consulta-positiva">
+                                <i class="fas fa-check-circle me-2"></i>Consulta Positiva
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-form="consulta-negativa">
+                                <i class="fas fa-ban me-2"></i>Consulta Negativa
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" data-form="consulta-negativa-tipo">
+                                <i class="fas fa-info-circle me-2"></i>Consulta Tipo Reporte
+                            </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Welcome Section -->
+        <div id="welcome-section" class="text-center mb-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 text-primary mb-3">
+                        <i class="fas fa-mobile-alt me-3"></i>
+                        SRTM API Client
+                    </h1>
+                    <p class="lead text-muted">
+                        Sistema de gestión para registro y consulta de dispositivos móviles en las bases de datos positiva y negativa del SRTM.
+                    </p>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Seleccione una operación del menú superior</h5>
+                            <p class="card-text">Utilice el menú de navegación para acceder a las diferentes funcionalidades del sistema.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms Container -->
+        <div id="forms-container">
+            <!-- Registro Positivo Form -->
+            <div id="form-registro-positivo" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Registro Positivo (1001)</h4>
+                        <small>Registrar un IMEI en la lista positiva</small>
+                    </div>
+                    <div class="card-body">
+                        <form id="registroPositivoForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Usuario Propietario <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_usuario_propietario" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Natural</option>
+                                        <option value="2">Jurídico</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Identificación <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_identificacion_propietario" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Cédula</option>
+                                        <option value="4">Cédula de Extranjería</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Identificación Propietario <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="identificacion_propietario" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Nombre/Razón Social <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nombre_razon_social_propietario" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Dirección <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="direccion_propietario" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="telefono_contacto_propietario" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">IMSI</label>
+                                    <input type="text" class="form-control" name="imsi">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">MSISDN</label>
+                                    <input type="text" class="form-control" name="msisdn">
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Observaciones <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="observaciones" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta -->
+                        <div id="response-registroPositivoForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Operación</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registro Negativo Form -->
+            <div id="form-registro-negativo" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-warning text-dark">
+                        <h4 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Registro Negativo (2001)</h4>
+                        <small>Reportar un IMEI por robo o pérdida</small>
+                    </div>
+                    <div class="card-body">
+                        <form id="registroNegativoForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Reporte <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_reporte" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Robo</option>
+                                        <option value="2">Extravío</option>
+                                        <option value="3">Bloqueo</option>
+                                        <option value="4">Inválido</option>
+                                        <option value="5">No Homologado</option>
+                                        <option value="6">Duplicado</option>
+                                        <option value="7">Reincidente</option>
+                                        <option value="8">Administrativo</option>
+                                        <option value="9">IMEI en Centro Carcelario (INPEC)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Nombre quien reporta <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nombre_reporte" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Identificación <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_identificacion_reporte" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Cédula</option>
+                                        <option value="4">Cédula de Extranjería</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Identificación <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="identificacion_reporte" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="telefono_reporte" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="correo_electronico" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Dirección <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="direccion_reporte" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Ciudad <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="ciudad_reporte" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Departamento <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="departamento_reporte" required>
+                                </div>
+                                
+                                <!-- Campos condicionales para robo -->
+                                <div id="robo-fields" class="col-12 d-none">
+                                    <div class="alert alert-info">
+                                        <h6>Campos adicionales para reporte de robo:</h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">¿Se empleó violencia?</label>
+                                            <select class="form-select" name="empleo_violencia">
+                                                <option value="">Seleccionar...</option>
+                                                <option value="0">No</option>
+                                                <option value="1">Sí</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3" id="armas-field" style="display: none;">
+                                            <label class="form-label">Tipo de armas</label>
+                                            <select class="form-select" name="utilizacion_armas">
+                                                <option value="">Seleccionar...</option>
+                                                <option value="0">Fuego</option>
+                                                <option value="1">Blanca</option>
+                                                <option value="2">Otras</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3" id="menor-field" style="display: none;">
+                                            <label class="form-label">¿Víctima menor de edad?</label>
+                                            <select class="form-select" name="victima_menor_edad">
+                                                <option value="">Seleccionar...</option>
+                                                <option value="0">No</option>
+                                                <option value="1">Sí</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Observaciones <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="observaciones" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta -->
+                        <div id="response-registroNegativoForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Operación</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cancelación Negativo Form -->
+            <div id="form-cancelacion-negativo" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-times-circle me-2"></i>Cancelación Negativo (3001)</h4>
+                        <small>Cancelar un reporte de robo/pérdida</small>
+                    </div>
+                    <div class="card-body">
+                        <!-- ✅ NUEVO: Alerta informativa -->
+                        <div class="alert alert-info mb-4">
+                            <h6 class="mb-2"><i class="fas fa-info-circle me-2"></i>Información Importante</h6>
+                            <p class="mb-2">Para cancelar un registro negativo necesita:</p>
+                            <ul class="mb-0">
+                                <li>El IMEI exacto del dispositivo reportado</li>
+                                <li>La fecha y hora exacta del reporte original (formato: AAAAMMDDHHMMSS)</li>
+                                <li>Una justificación válida para la cancelación</li>
+                            </ul>
+                        </div>
+                        
+                        <form id="cancelacionNegativoForm">
+                            <div class="row">
+                                <!-- ✅ MEJORADO: Campo IMEI con validación pattern -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" pattern="[0-9]{15}" required>
+                                    <div class="form-text">Ingrese exactamente 15 dígitos numéricos</div>
+                                </div>
+                                
+                                <!-- ✅ NUEVO: Campo fecha_reporte completo -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Fecha del Reporte Original <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                        <input type="text" 
+                                            class="form-control fecha-reporte-input" 
+                                            name="fecha_reporte" 
+                                            pattern="[0-9]{14}" 
+                                            maxlength="14" 
+                                            placeholder="AAAAMMDDHHMMSS" 
+                                            required>
+                                        <button type="button" class="btn btn-outline-secondary" id="btn-fecha-actual" title="Usar fecha actual">
+                                            <i class="fas fa-clock"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-text">
+                                        Formato: AAAAMMDDHHMMSS (Ejemplo: 20241025143000 = 25/Oct/2024 14:30:00)
+                                    </div>
+                                    <div id="fecha-preview" class="fecha-preview mt-2" style="display: none;">
+                                        <small class="text-muted">
+                                            <i class="fas fa-eye me-1"></i>
+                                            <span class="fecha-readable"></span>
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <!-- ✅ MEJORADO: Campo observaciones ampliado -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Observaciones <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" 
+                                            name="observaciones" 
+                                            rows="4" 
+                                            required 
+                                            placeholder="Ingrese la razón de la cancelación del reporte (ej: Recuperación del equipo, Error en el reporte inicial, etc.)"></textarea>
+                                    <div class="form-text">Describa detalladamente la razón de la cancelación</div>
+                                </div>
+                            </div>
+                            
+                            <!-- ✅ MEJORADO: Botón con texto más específico -->
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar Cancelación
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta (sin cambios) -->
+                        <div id="response-cancelacionNegativoForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Operación</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modificación Positivo Form -->
+            <div id="form-modificacion-positivo" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="mb-0"><i class="fas fa-edit me-2"></i>Modificación Positivo (4001)</h4>
+                        <small>Modificar un registro positivo existente</small>
+                    </div>
+                    <div class="card-body">
+                        <form id="modificacionPositivoForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Modificación <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_modificacion" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Venta Inicial</option>
+                                        <option value="2">Titularidad</option>
+                                        <option value="3">Modificación</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Campos del nuevo propietario -->
+                                <div class="col-12">
+                                    <h6 class="text-primary border-bottom pb-2">Datos del Nuevo Propietario</h6>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Usuario <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_usuario_propietario" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Natural</option>
+                                        <option value="2">Jurídico</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Identificación <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_identificacion_propietario" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Cédula</option>
+                                        <option value="4">Cédula de Extranjería</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Identificación <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="identificacion_propietario" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Nombre/Razón Social <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nombre_razon_social_propietario" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Dirección <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="direccion_propietario" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="telefono_contacto_propietario" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Usuario Autorizado <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_usuario_autorizado" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="0">No</option>
+                                        <option value="1">Sí - Tipo 1</option>
+                                        <option value="2">Sí - Tipo 2</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Campos condicionales para propietario anterior -->
+                                <div id="propietario-anterior-fields" class="col-12 d-none">
+                                    <h6 class="text-secondary border-bottom pb-2">Datos del Propietario Anterior</h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Tipo Identificación Anterior</label>
+                                            <select class="form-select" name="tipo_identificacion_propietario_anterior">
+                                                <option value="">Seleccionar...</option>
+                                                <option value="1">Cédula</option>
+                                                <option value="4">Cédula de Extranjería</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Identificación Anterior</label>
+                                            <input type="text" class="form-control" name="identificacion_propietario_anterior">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Campos condicionales para usuario autorizado -->
+                                <div id="autorizado-fields" class="col-12 d-none">
+                                    <h6 class="text-info border-bottom pb-2">Datos del Usuario Autorizado</h6>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Tipo Identificación</label>
+                                            <select class="form-select" name="tipo_identificacion_autorizado">
+                                                <option value="">Seleccionar...</option>
+                                                <option value="1">Cédula</option>
+                                                <option value="4">Cédula de Extranjería</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Identificación</label>
+                                            <input type="text" class="form-control" name="identificacion_autorizado">
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" name="nombre_razon_social_autorizado">
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label">Dirección</label>
+                                            <input type="text" class="form-control" name="direccion_autorizado">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Teléfono</label>
+                                            <input type="text" class="form-control" name="telefono_contacto_autorizado">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">IMSI</label>
+                                    <input type="text" class="form-control" name="imsi">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">MSISDN</label>
+                                    <input type="text" class="form-control" name="msisdn">
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Observaciones</label>
+                                    <textarea class="form-control" name="observaciones" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-info">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta -->
+                        <div id="response-modificacionPositivoForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Operación</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cancelación Positivo Form -->
+            <div id="form-cancelacion-positivo" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="mb-0"><i class="fas fa-minus-circle me-2"></i>Cancelación Positivo (5001)</h4>
+                        <small>Cancelar un registro de la lista positiva</small>
+                    </div>
+                    <div class="card-body">
+                        <form id="cancelacionPositivoForm">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Usuario <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_usuario_propietario" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Natural</option>
+                                        <option value="2">Jurídico</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Identificación <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_identificacion_propietario" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Cédula</option>
+                                        <option value="4">Cédula de Extranjería</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Identificación Propietario <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="identificacion_propietario" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Observaciones <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="observaciones" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta -->
+                        <div id="response-cancelacionPositivoForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Operación</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consulta Positiva Form -->
+            <div id="form-consulta-positiva" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-check-circle me-2"></i>Consulta Positiva</h4>
+                        <small>Consultar IMEI en BDA Positiva</small>
+                    </div>
+                    <div class="card-body">
+                        <form id="consultaPositivaForm">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo Identificación <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="tipo_identificacion_propietario" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Cédula</option>
+                                        <option value="4">Cédula de Extranjería</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Identificación Propietario <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="identificacion_propietario" required>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-search me-2"></i>Consultar
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta -->
+                        <div id="response-consultaPositivaForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Consulta</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consulta Negativa Form -->
+            <div id="form-consulta-negativa" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-warning text-dark">
+                        <h4 class="mb-0"><i class="fas fa-ban me-2"></i>Consulta Negativa</h4>
+                        <small>Consultar IMEI en BDA Negativa</small>
+                    </div>
+                    <div class="card-body">
+                        <form id="consultaNegativaForm">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" pattern="[0-9]{15}" required>
+                                    <div class="form-text">Ingrese exactamente 15 dígitos numéricos</div>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-search me-2"></i>Consultar
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta -->
+                        <div id="response-consultaNegativaForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Consulta</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consulta Negativa Tipo Reporte Form -->
+            <div id="form-consulta-negativa-tipo" class="form-section d-none">
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="mb-0"><i class="fas fa-info-circle me-2"></i>Consulta Tipo Reporte</h4>
+                        <small>Consultar tipo de reporte de un IMEI en BDA Negativa</small>
+                    </div>
+                    <div class="card-body">
+                        <form id="consultaNegativaTipoForm">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">IMEI <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="imei" maxlength="15" pattern="[0-9]{15}" required>
+                                    <div class="form-text">Ingrese exactamente 15 dígitos numéricos</div>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-info">
+                                    <i class="fas fa-search me-2"></i>Consultar
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-clear">
+                                    <i class="fas fa-eraser me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Área de respuesta -->
+                        <div id="response-consultaNegativaTipoForm" class="response-area mt-4" style="display: none;">
+                            <hr>
+                            <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Resultado de la Consulta</h5>
+                            <div class="response-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay d-none">
+            <div class="loading-content">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+                <p class="mt-3">Procesando solicitud...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light mt-5 py-4">
+        <div class="container text-center">
+            <p class="text-muted mb-0">© 2025 SRTM API Client - Sistema de Registro y Consulta de Dispositivos Móviles</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="BDAWebService"
+             targetNamespace="http://service.client.xcewsmulti.iecisa.es"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://service.client.xcewsmulti.iecisa.es"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <types>
+        <xsd:schema targetNamespace="http://service.client.xcewsmulti.iecisa.es">
+            <xsd:element name="receiveMessage">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:string"/>
+                        <xsd:element name="password" type="xsd:string"/>
+                        <xsd:element name="xmlMsg" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="receiveMessageResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="return" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="receiveMessageRequest">
+        <part name="parameters" element="tns:receiveMessage"/>
+    </message>
+    <message name="receiveMessageResponse">
+        <part name="parameters" element="tns:receiveMessageResponse"/>
+    </message>
+
+    <portType name="BDAWebServicePortType">
+        <operation name="receiveMessage">
+            <input message="tns:receiveMessageRequest"/>
+            <output message="tns:receiveMessageResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="BDAWebServiceSoapBinding" type="tns:BDAWebServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="receiveMessage">
+            <soap:operation soapAction="" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="BDAWebService">
+        <port name="BDAWebServicePort" binding="tns:BDAWebServiceSoapBinding">
+            <soap:address location="http://10.161.100.4:8080/XCEWS_SRTM/services/BDAWebService"/>
+        </port>
+    </service>
+</definitions>
